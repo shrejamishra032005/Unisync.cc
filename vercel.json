@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --workspace @uniconnect/web --workspace @uniconnect/shared --include-workspace-root",
+  "buildCommand": "cd apps/web && npx prisma generate --schema=../../prisma/schema.prisma && npx next build",
+  "outputDirectory": "apps/web/.next",
+  "framework": "nextjs"
+}

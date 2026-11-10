@@ -1,0 +1,37 @@
+{
+  "name": "uniconnect",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "db:generate": "cd prisma && npx prisma generate",
+    "db:migrate": "cd prisma && npx prisma migrate dev",
+    "db:push": "cd prisma && npx prisma db push",
+    "db:studio": "cd prisma && npx prisma studio",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "check:ready": "pwsh -File scripts/check-local-readiness.ps1",
+    "check:demo": "pwsh -File scripts/validate-real-demo.ps1",
+    "check:production": "pwsh -File scripts/validate-production.ps1",
+    "smoke:production": "pwsh -File scripts/smoke-test-production.ps1",
+    "generate:secrets": "pwsh -File scripts/generate-jwt-secrets.ps1",
+    "vercel:setup": "npm run check:ready && npm run build && npm run test",
+    "vercel:deploy": "npx vercel --prod --yes",
+    "vercel:logs": "npx vercel logs unisync.cc --since 1h",
+    "infra:up": "docker compose up -d postgres redis elasticsearch",
+    "infra:down": "docker compose down"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "packageManager": "npm@10.8.0"
+}
